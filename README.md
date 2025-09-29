@@ -120,18 +120,42 @@ Follow the existing HTML structure and CSS classes:
 
 ## Contact Form
 
-The contact form includes:
-- Client-side validation
-- Real-time error feedback
-- Success/error notifications
-- Responsive design
-- Required field validation
+The contact form is fully wired to a serverless backend using a Netlify Function + SendGrid.
 
-**Note**: The form currently shows a success message simulation. For production use, integrate with:
-- [Formspree](https://formspree.io/)
-- [Netlify Forms](https://www.netlify.com/products/forms/)
-- [EmailJS](https://www.emailjs.com/)
-- Your own backend API
+Features:
+- Client + server validation (name, email, subject, message)
+- Honeypot anti-bot field
+- Dry-run mode if environment not configured
+- SendGrid transactional email delivery
+- Helpful status + notifications on the frontend
+- Debug mode (optional) to inspect which env vars are present
+
+### Environment Variables
+Defined locally in `.env` (see `.env.example`) and in Netlify dashboard:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| SENDGRID_API_KEY | Yes | API key with Mail Send permission |
+| SENDGRID_FROM | Yes | Verified sender (single sender or domain) |
+| CONTACT_TO | No | Override destination (defaults to SENDGRID_FROM) |
+| CONTACT_DEBUG | No | If set to `1`, dry-run responses expose envPresence |
+
+### Dry Run Behavior
+If `SENDGRID_API_KEY` or `SENDGRID_FROM` is missing the function returns `dryRun: true` so you can test UX without sending emails.
+
+### Local Development
+1. Copy `.env.example` to `.env`
+2. Fill in SendGrid values
+3. Run `npm install` then `npm run dev`
+4. Open `http://localhost:4000` (or your static preview) and submit the form.
+
+### Production (Netlify)
+1. Add env vars in Site Settings → Build & deploy → Environment
+2. Redeploy (new function build required)
+3. Test form; if not sending, temporarily add `CONTACT_DEBUG=1` and re-submit with `?debug=1` query parameter.
+
+### Error Handling
+If SendGrid returns an error a generic message is shown to the user and details are logged server-side (not exposed to the browser).
 
 ## File Structure
 
@@ -144,6 +168,11 @@ Portfolio/
 │   ├── js/
 │   │   └── script.js      # Interactive functionality
 │   └── images/            # Your images and photos
+├── netlify/                # Netlify Functions source
+│   └── functions/
+│       └── contact.js     # Serverless contact form handler (SendGrid)
+├── server.js              # Local Express dev server (mirrors serverless logic)
+├── .env.example           # Sample environment configuration
 └── README.md              # This file
 ```
 
