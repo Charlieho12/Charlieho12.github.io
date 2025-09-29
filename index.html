@@ -318,7 +318,7 @@
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Charlieho12/Intranet-Portal" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                           
                         </div>
                     </div>
                 </div>
@@ -417,21 +417,21 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Connect Section (Replaces Contact Form) -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">Connect & Resources</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Let's Work Together</h3>
-                    <p>I'm always interested in new opportunities and challenging projects. Whether you need a backend developer for your team or want to discuss a project, I'd love to hear from you.</p>
-                    
+                    <h3>Let’s Build Something</h3>
+                    <p>I’ve removed the direct form to simplify deployment. You can still reach me quickly using the methods below, grab my resume, or explore what I’m currently focused on.</p>
+
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>charlieho61@gmail.com</p>
+                                <p id="direct-email">charlieho61@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -445,47 +445,40 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h4>Location</h4>
-                                <p>Quezon City, Philippines</p>
+                                <p>Quezon City, Philippines (GMT+8)</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/charlie-ho-333a26290/" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Charlieho12" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://www.facebook.com/HoCharlieee" class="social-link"><i class="fab fa-facebook"></i></a>
-                    </div>
+                    
+
+                    
                 </div>
 
-                <form class="contact-form" id="contact-form" novalidate>
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                <div class="contact-info alt-panel">
+                    <div class="connect-actions">
+                        <button id="copy-email" class="btn btn-primary" data-email="charlieho61@gmail.com"><i class="fas fa-copy"></i> Copy Email</button>
+                        <a href="assets/docs/Resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener"><i class="fas fa-file"></i> Resume</a>
+                        <a href="https://github.com/Charlieho12" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.linkedin.com/in/charlie-ho-333a26290/" class="btn btn-secondary" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     </div>
-                    <div class="form-group">
-                        <label for="company">Company (Optional)</label>
-                        <input type="text" id="company" name="company" placeholder="Your Company / Organization">
+                    <br>
+                    <h3>Current Focus</h3>
+                    <ul class="focus-list" id="focus-list">
+                        <li class="focus-item active">Optimizing database queries</li>
+                        <li class="focus-item">Designing robust REST APIs</li>
+                        <li class="focus-item">Implementing secure authentication</li>
+                        <li class="focus-item">Improving system observability</li>
+                        <li class="focus-item">Scaling backend performance</li>
+                    </ul>
+                    <div class="mini-metrics">
+                        <div class="metric"><span>Avg Response:</span><strong> &lt; 24h</strong></div>
+                        <div class="metric"><span>Preferred Stack:</span><strong> Python / Django / Flask</strong></div>
+                        <div class="metric"><span>Databases:</span><strong> MongoDB / MySQL</strong></div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject *</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
-                    </div>
-                    <!-- Honeypot field -->
-                    <div style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden;">
-                        <label for="_honeypot">Leave this field empty</label>
-                        <input type="text" id="_honeypot" name="_honeypot" tabindex="-1" autocomplete="off">
-                    </div>
-                    <div id="form-status" aria-live="polite" style="min-height:24px;margin-bottom:0.75rem;font-size:0.9rem;"></div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
+                    <br>
+                    <p class="small-note">Want to collaborate? Just copy the email above and reach out directly.</p>
+                </div>
             </div>
         </div>
     </section>

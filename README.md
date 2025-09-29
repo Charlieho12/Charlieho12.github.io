@@ -118,44 +118,30 @@ Follow the existing HTML structure and CSS classes:
 - Accessible navigation
 - Clean URLs (works with static hosting)
 
-## Contact Form
+## Connect & Resources Section
 
-The contact form submits to a local Express backend endpoint at `/api/contact` which uses Nodemailer + your SMTP credentials.
+The contact form was removed to simplify hosting and deployment. In its place is a "Connect & Resources" section that provides:
 
-Features:
-- Client + server-side validation
-- Honeypot anti-bot field (`_honeypot`)
-- Rate limiting (10 requests / 15 minutes per IP)
-- Dry-run mode when SMTP env vars missing (lets you test UI without sending)
-- Plain text + HTML email formatting
+- Direct email (copy-to-clipboard button)
+- Resume download link (add your PDF at `assets/docs/Resume.pdf`)
+- Quick launch buttons (GitHub, LinkedIn)
+- Rotating “Current Focus” highlights
+- Mini metrics (response time, preferred stack, databases)
 
-### Environment Variables
-Create a `.env` file (see `.env.example`):
+### Customizing
+1. Update email and phone directly in `index.html` (Connect section).
+2. Place a file named `Resume.pdf` inside `assets/docs/` (create the folder if missing).
+3. Edit focus list items (`<ul id="focus-list">`).
+4. Update social links (GitHub/LinkedIn) as needed.
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| SMTP_HOST | Yes | SMTP server host (e.g. smtp.gmail.com) |
-| SMTP_PORT | Yes | SMTP port (587 or 465 typically) |
-| SMTP_USER | Yes | SMTP username / email address |
-| SMTP_PASS | Yes | SMTP password or app password |
-| CONTACT_TO | No | Override destination (defaults to SMTP_USER) |
-| PORT | No | Local server port (default 4000) |
-| CORS_ORIGIN | No | Comma list of allowed origins (default *) |
+### Removing Resume Button
+If you don't have a resume yet, delete the `<a href="assets/docs/Resume.pdf" ...>` anchor or hide it with CSS.
 
-If any required SMTP values are missing, the API returns `{ dryRun: true }` with a success response so frontend UX still flows.
+### Adding Another Action Button
+Duplicate one of the existing `<a class="btn btn-secondary">` buttons and adjust icon + link.
 
-### Running Locally
-1. `cp .env.example .env` (or manually create `.env`)
-2. Fill in SMTP values (Gmail users: create an App Password if 2FA enabled)
-3. `npm install`
-4. `npm run dev` (or `npm start`)
-5. Open your static site (e.g. VS Code Live Server or `http://localhost:4000`) and submit the form
-
-### Deployment
-Host the static files (GitHub Pages, simple VPS, etc.) and run the Express server on a small Node host (Render, Railway, Fly.io, etc.). Update the frontend fetch URL if backend lives on another domain (e.g. replace `/api/contact` with `https://api.example.com/api/contact`).
-
-### Error Handling
-Server returns JSON errors with meaningful messages for validation failure and a generic message for internal errors (while logging details server-side).
+### Why Remove the Form?
+Reducing friction for deployment (no backend email transport, no SMTP provider limits, no spam handling). Direct email contact ensures reliability on free hosting tiers.
 
 ## File Structure
 

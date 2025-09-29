@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeThemeToggle();
     initializeScrollEffects();
     initializeSkillBars();
-    initializeContactForm();
+    initializeConnectActions();
     initializeBackToTop();
     initializeAnimations();
 });
@@ -196,187 +196,31 @@ function initializeSkillBars() {
     });
 }
 
-// Contact Form Functions
-function initializeContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const formObject = {};
-        
-        formData.forEach((value, key) => {
-            formObject[key] = value;
+// Connect Actions (Copy Email + rotating focus items)
+function initializeConnectActions() {
+    const copyBtn = document.getElementById('copy-email');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const email = copyBtn.getAttribute('data-email');
+            navigator.clipboard.writeText(email).then(() => {
+                showNotification('Email copied to clipboard', 'success');
+            }).catch(() => showNotification('Failed to copy email', 'error'));
         });
-
-        // Validate form
-        if (!validateForm(formObject)) return;
-
-        const statusDiv = document.getElementById('form-status');
-        const submitButton = this.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-        statusDiv.textContent = '';
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formObject)
-            });
-            const data = await response.json();
-
-            if (!response.ok || !data.success) {
-                throw new Error(data.error || 'Failed to send message.');
-            }
-
-            if (data.dryRun) {
-                statusDiv.style.color = '#f59e0b';
-                statusDiv.innerHTML = 'Message validated (dry run). Configure SMTP to enable sending.';
-                showNotification('Dry run success. Configure SMTP to actually send.', 'warning');
-            } else {
-                statusDiv.style.color = '#10b981';
-                statusDiv.textContent = 'Message sent successfully!';
-                showNotification('Message sent successfully!', 'success');
-                contactForm.reset();
-            }
-        } catch (err) {
-            console.error(err);
-            statusDiv.style.color = '#ef4444';
-            statusDiv.textContent = err.message;
-            showNotification(err.message, 'error');
-        } finally {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        }
-    });
-
-    // Insert status div if missing (fallback)
-    if (!document.getElementById('form-status')) {
-        const statusEl = document.createElement('div');
-        statusEl.id = 'form-status';
-        statusEl.style.minHeight = '24px';
-        statusEl.style.marginBottom = '0.75rem';
-        contactForm.insertBefore(statusEl, contactForm.querySelector('button[type="submit"]'));
     }
 
-    // Real-time validation
-    const formInputs = contactForm.querySelectorAll('input, textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            validateField(this);
-        });
-
-        input.addEventListener('input', function() {
-            clearFieldError(this);
-        });
-    });
-}
-
-function validateForm(data) {
-    let isValid = true;
-    const errors = [];
-
-    // Name validation
-    if (!data.name || data.name.trim().length < 2) {
-        errors.push('Name must be at least 2 characters long');
-        isValid = false;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!data.email || !emailRegex.test(data.email)) {
-        errors.push('Please enter a valid email address');
-        isValid = false;
-    }
-
-    // Subject validation
-    if (!data.subject || data.subject.trim().length < 5) {
-        errors.push('Subject must be at least 5 characters long');
-        isValid = false;
-    }
-
-    // Message validation
-    if (!data.message || data.message.trim().length < 10) {
-        errors.push('Message must be at least 10 characters long');
-        isValid = false;
-    }
-
-    if (!isValid) {
-        showNotification(errors.join('<br>'), 'error');
-    }
-
-    return isValid;
-}
-
-function validateField(field) {
-    const value = field.value.trim();
-    let isValid = true;
-    let errorMessage = '';
-
-    switch (field.name) {
-        case 'name':
-            if (value.length < 2) {
-                errorMessage = 'Name must be at least 2 characters long';
-                isValid = false;
-            }
-            break;
-        case 'email':
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                errorMessage = 'Please enter a valid email address';
-                isValid = false;
-            }
-            break;
-        case 'subject':
-            if (value.length < 5) {
-                errorMessage = 'Subject must be at least 5 characters long';
-                isValid = false;
-            }
-            break;
-        case 'message':
-            if (value.length < 10) {
-                errorMessage = 'Message must be at least 10 characters long';
-                isValid = false;
-            }
-            break;
-    }
-
-    if (!isValid) {
-        showFieldError(field, errorMessage);
-    } else {
-        clearFieldError(field);
-    }
-
-    return isValid;
-}
-
-function showFieldError(field, message) {
-    clearFieldError(field);
-    
-    field.style.borderColor = 'var(--error-color, #ef4444)';
-    
-    const errorElement = document.createElement('div');
-    errorElement.className = 'field-error';
-    errorElement.style.color = 'var(--error-color, #ef4444)';
-    errorElement.style.fontSize = 'var(--font-size-sm)';
-    errorElement.style.marginTop = 'var(--spacing-xs)';
-    errorElement.textContent = message;
-    
-    field.parentNode.appendChild(errorElement);
-}
-
-function clearFieldError(field) {
-    field.style.borderColor = 'var(--border-color)';
-    
-    const existingError = field.parentNode.querySelector('.field-error');
-    if (existingError) {
-        existingError.remove();
+    // Rotating focus highlight
+    const focusList = document.getElementById('focus-list');
+    if (focusList) {
+        const items = Array.from(focusList.querySelectorAll('.focus-item'));
+        let idx = 0;
+        setInterval(() => {
+            items.forEach((el,i) => el.classList.toggle('active', i === idx));
+            idx = (idx + 1) % items.length;
+        }, 3000);
     }
 }
+
+// Removed form validation utilities after contact form removal
 
 // Notification System
 function showNotification(message, type = 'info') {
