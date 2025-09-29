@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlie Ho - Backend Developer Portfolio</title>
+    <meta name="description" content="Professional Backend Developer specializing in scalable APIs, databases, and backend architecture">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="gradient-text">Charlie Ho</span>
+                </h1>
+                <h2 class="hero-subtitle">Backend Developer</h2>
+                <p class="hero-description">
+                    Specialized in building scalable APIs, robust databases, and efficient backend architectures that power modern applications.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="code-animation">
+                    <div class="code-line">
+                        <span class="code-keyword">def</span> 
+                        <span class="code-function">build_awesome_apps</span>():
+                    </div>
+                    <div class="code-line indent">
+                        <span class="code-keyword">return</span> 
+                        <span class="code-string">"Scalable Solutions"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who I Am</h3>
+                    <p>
+                        I am a Computer Engineering graduate with a strong foundation in backend development and database 
+                        management. I am proficient in Python, Django, and JavaScript, and have experience working with 
+                        databases such as MongoDB and MySQL.
+                    </p>
+                    <p>
+                        My expertise includes building efficient APIs, optimizing server-side logic, and integrating backend 
+                        systems to ensure smooth application performance. I am passionate about solving complex technical 
+                        challenges and contributing to innovative projects in dynamic and fast-paced environments.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h4>1</h4>
+                            <p>Year Experience</p>
+                        </div>
+                        <div class="stat">
+                            <h4>1+</h4>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h4>10+</h4>
+                            <p>Technologies Mastered</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-image">
+                        <img src="assets/images/profile.png" alt="Professional Photo" class="profile-photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor of Science in Computer Engineering</h3>
+                        <h4>Batangas State University</h4>
+                        <p class="timeline-date">2020 - 2024</p>
+                        <p>Gained a strong foundation in software engineering, backend systems, algorithms, and database design, with hands-on experience in developing efficient and scalable applications.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Senior High School</h3>
+                        <h4>Our Lady of Caysasay Academy</h4>
+                        <p class="timeline-date">2018 - 2020</p>
+                        <p>Completed the Senior High School program with a focus on STEM subjects, enhancing my analytical and problem-solving skills.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>High School</h3>
+                        <h4>Our Lady of Caysasay Academy</h4>
+                        <p class="timeline-date">2014 - 2018</p>
+                        <p>Completed the High School program with a focus on STEM subjects, laying the groundwork for my future studies in computer engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Python</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>HTML</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>CSS</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Django</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Flask</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>MongoDB</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>MS SQL</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="50"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>MySQL</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Git</span>
+                        <span class="skill-badge">REST APIs</span>
+                        <span class="skill-badge">Canva</span>
+                        <span class="skill-badge">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-date">2024 - 2025</div>
+                    <div class="experience-content">
+                        <h3>IT Analyst</h3>
+                        <h4>Kubota Philippines Inc.</h4>
+                        <p>Backend Development</p>
+                        <ul>
+                            <li>Developed a web-based Travel & Official Business Request System, streamlining approvals, documentation, and cash advance workflows.</li>
+                            <li>Built with Flask (Python), MongoDB, HTML/CSS/JavaScript</li>
+                            <li>Implemented multi-role access, email alerts, dynamic approval routing, and secure authentication</li>
+                            <li>Integrated RESTful APIs with Swagger UI for integration and documentation</li>
+                            <li>Supported both front-end and back-end development with design/process improvements</li>
+                        </ul>
+                        <br>
+                        <p>Technical & Application Support</p>
+                        <ul>
+                            <li>Troubleshot and optimized SAP-connected databases for seamless integration and performance</li>
+                            <li>Maintained and secured APIs with encryption, authentication, and user access controls</li>
+                            <li>Resolved system issues including timeouts, connection errors, and server-side errors (500–507)</li>
+                            <li>Provided technical support, documentation, and reporting for SAP-related applications</li>
+                            <li>Generated scheduled and ad hoc reports, ensuring accurate and relevant data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Employee Intranet Portal</h3>
+                        <p>Web-based application for managing TOA, OB, and Cash Advance requests with multi-level approvals, notifications, and reporting. Built with Flask, MongoDB, and Flask-Mail.</p>
+                        <div class="project-tech">
+                            <span>Flask Python</span>
+                            <span>CSS</span>
+                            <span>HTML</span>
+                            <span>JavaScript</span>
+                            <span>MongoDB</span>
+                            <span>REST API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Charlieho12/Intranet-Portal" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <div class="certification-logo">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3>AWS Cloud Technical Essentials</h3>
+                        <p>Amazon Web Services</p>
+                        <p class="cert-date">Issued: November 2023</p>
+                        <a href="https://coursera.org/share/705d992b377b43d1855d490553840eb1" class="cert-link">Verify Certificate</a>
+                    </div>
+                </div>
+
+                <div class="certification-card">
+                    <div class="certification-logo">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="certification-content">
+                        <h3>Business Communication Training</h3>
+                        <p>Kubota</p>
+                        <p class="cert-date">Issued: May 2025</p>
+                        <a href="https://drive.google.com/file/d/1L5iP6airVpGzfS0M7dIjpI1aUFMDIU4H/view?usp=sharing" class="cert-link">Verify Certificate</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Services I Offer</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <ul>
+                        <li>Design and build secure, scalable, and efficient backend systems</li>
+                        <li>Develop RESTful APIs with Flask/Django and integrate with databases (MongoDB, MySQL)</li>
+                        <li>Implement authentication, authorization, and role-based access control</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="far fa-window-maximize"></i>
+                    </div>
+                    <h3>Web Application Development</h3>
+                    <ul>
+                        <li>Full-stack web solutions with Flask (Python), HTML, CSS, and JavaScript</li>
+                        <li>Custom business applications with multi-level approval workflows, notifications, and reporting</li>
+                        <li>API integration and documentation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Management & Optimization</h3>
+                    <ul>
+                        <li>Design, manage, and optimize databases (MongoDB, MySQL, SAP-connected systems)</li>
+                        <li>Troubleshoot and resolve performance issues, connection errors, and system timeouts</li>
+                        <li>Ensure data accuracy, consistency, and security</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Technical & Application Support</h3>
+                    <ul>
+                        <li>Troubleshoot and optimized SAP-connected databases</li>
+                        <li>Provide technical support, troubleshooting, and issue resolution</li>
+                        <li>Generate scheduled and ad hoc reports for business operations</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <p>I'm always interested in new opportunities and challenging projects. Whether you need a backend developer for your team or want to discuss a project, I'd love to hear from you.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>charlieho61@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+63 994 253 9625</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Quezon City, Philippines</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/charlie-ho-333a26290/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Charlieho12" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/HoCharlieee" class="social-link"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company (Optional)</label>
+                        <input type="text" id="company" name="company" placeholder="Your Company / Organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <!-- Honeypot field -->
+                    <div style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden;">
+                        <label for="_honeypot">Leave this field empty</label>
+                        <input type="text" id="_honeypot" name="_honeypot" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div id="form-status" aria-live="polite" style="min-height:24px;margin-bottom:0.75rem;font-size:0.9rem;"></div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Charlie Ho</h3>
+                    <p>Backend Developer specializing in scalable solutions and robust architectures.</p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/in/charlie-ho-333a26290/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Charlieho12"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/HoCharlieee"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Backend Development</a></li>
+                        <li><a href="#services">Web Application Development</a></li>
+                        <li><a href="#services">Database Management & Optimization</a></li>
+                        <li><a href="#services">Technical & Application Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> charlieho61@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +63 994 253 9625</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Quezon City, Philippines</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Charlie Ho. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
