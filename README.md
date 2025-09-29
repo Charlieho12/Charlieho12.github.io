@@ -120,42 +120,42 @@ Follow the existing HTML structure and CSS classes:
 
 ## Contact Form
 
-The contact form is fully wired to a serverless backend using a Netlify Function + SendGrid.
+The contact form submits to a local Express backend endpoint at `/api/contact` which uses Nodemailer + your SMTP credentials.
 
 Features:
-- Client + server validation (name, email, subject, message)
-- Honeypot anti-bot field
-- Dry-run mode if environment not configured
-- SendGrid transactional email delivery
-- Helpful status + notifications on the frontend
-- Debug mode (optional) to inspect which env vars are present
+- Client + server-side validation
+- Honeypot anti-bot field (`_honeypot`)
+- Rate limiting (10 requests / 15 minutes per IP)
+- Dry-run mode when SMTP env vars missing (lets you test UI without sending)
+- Plain text + HTML email formatting
 
 ### Environment Variables
-Defined locally in `.env` (see `.env.example`) and in Netlify dashboard:
+Create a `.env` file (see `.env.example`):
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| SENDGRID_API_KEY | Yes | API key with Mail Send permission |
-| SENDGRID_FROM | Yes | Verified sender (single sender or domain) |
-| CONTACT_TO | No | Override destination (defaults to SENDGRID_FROM) |
-| CONTACT_DEBUG | No | If set to `1`, dry-run responses expose envPresence |
+| SMTP_HOST | Yes | SMTP server host (e.g. smtp.gmail.com) |
+| SMTP_PORT | Yes | SMTP port (587 or 465 typically) |
+| SMTP_USER | Yes | SMTP username / email address |
+| SMTP_PASS | Yes | SMTP password or app password |
+| CONTACT_TO | No | Override destination (defaults to SMTP_USER) |
+| PORT | No | Local server port (default 4000) |
+| CORS_ORIGIN | No | Comma list of allowed origins (default *) |
 
-### Dry Run Behavior
-If `SENDGRID_API_KEY` or `SENDGRID_FROM` is missing the function returns `dryRun: true` so you can test UX without sending emails.
+If any required SMTP values are missing, the API returns `{ dryRun: true }` with a success response so frontend UX still flows.
 
-### Local Development
-1. Copy `.env.example` to `.env`
-2. Fill in SendGrid values
-3. Run `npm install` then `npm run dev`
-4. Open `http://localhost:4000` (or your static preview) and submit the form.
+### Running Locally
+1. `cp .env.example .env` (or manually create `.env`)
+2. Fill in SMTP values (Gmail users: create an App Password if 2FA enabled)
+3. `npm install`
+4. `npm run dev` (or `npm start`)
+5. Open your static site (e.g. VS Code Live Server or `http://localhost:4000`) and submit the form
 
-### Production (Netlify)
-1. Add env vars in Site Settings → Build & deploy → Environment
-2. Redeploy (new function build required)
-3. Test form; if not sending, temporarily add `CONTACT_DEBUG=1` and re-submit with `?debug=1` query parameter.
+### Deployment
+Host the static files (GitHub Pages, simple VPS, etc.) and run the Express server on a small Node host (Render, Railway, Fly.io, etc.). Update the frontend fetch URL if backend lives on another domain (e.g. replace `/api/contact` with `https://api.example.com/api/contact`).
 
 ### Error Handling
-If SendGrid returns an error a generic message is shown to the user and details are logged server-side (not exposed to the browser).
+Server returns JSON errors with meaningful messages for validation failure and a generic message for internal errors (while logging details server-side).
 
 ## File Structure
 
@@ -168,11 +168,8 @@ Portfolio/
 │   ├── js/
 │   │   └── script.js      # Interactive functionality
 │   └── images/            # Your images and photos
-├── netlify/                # Netlify Functions source
-│   └── functions/
-│       └── contact.js     # Serverless contact form handler (SendGrid)
-├── server.js              # Local Express dev server (mirrors serverless logic)
-├── .env.example           # Sample environment configuration
+├── server.js              # Express backend (contact endpoint)
+├── .env.example           # Sample SMTP environment configuration
 └── README.md              # This file
 ```
 

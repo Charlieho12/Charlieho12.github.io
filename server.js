@@ -62,11 +62,21 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
 
     const dryRun = !(smtpHost && smtpUser && smtpPass && toAddress);
 
+    // Build presence map for debugging missing env vars (not returned unless debug requested)
+    const envPresence = {
+      SMTP_HOST: !!smtpHost,
+      SMTP_USER: !!smtpUser,
+      SMTP_PASS: !!smtpPass,
+      CONTACT_TO: !!toAddress
+    };
+
     if (dryRun) {
+      const debug = req.query.debug === '1';
       return res.status(200).json({
         success: true,
         dryRun: true,
-        message: 'Dry run success (configure SMTP to actually send).'
+        message: 'Dry run success (configure SMTP to actually send).',
+        ...(debug ? { envPresence } : {})
       });
     }
 
