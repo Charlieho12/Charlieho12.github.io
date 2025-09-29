@@ -105,11 +105,15 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       });
     }
 
-    const transporter = nodemailer.createTransport({
+    // Create base transporter (will fallback to alternate port if needed)
+    let transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
       secure: smtpPort === 465,
-      auth: { user: smtpUser, pass: smtpPass }
+      auth: { user: smtpUser, pass: smtpPass },
+      connectionTimeout: 15_000, // 15s
+      socketTimeout: 15_000,
+      greetingTimeout: 10_000
     });
 
     const htmlBody = `
@@ -133,12 +137,70 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       html: htmlBody
     };
 
-    await transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (sendErr) {
+      // If timeout on 587, attempt implicit TLS port 465 as fallback
+      const isTimeout = sendErr && (sendErr.code === 'ETIMEDOUT' || sendErr.command === 'CONN');
+      if (isTimeout && smtpPort === 587) {
+        try {
+          const fallback = nodemailer.createTransport({
+            host: smtpHost,
+            port: 465,
+            secure: true,
+            auth: { user: smtpUser, pass: smtpPass },
+            connectionTimeout: 15_000,
+            socketTimeout: 15_000,
+            greetingTimeout: 10_000
+          });
+          await fallback.sendMail(mailOptions);
+        } catch (fallbackErr) {
+          console.error('Fallback SMTP (465) failed:', fallbackErr);
+          throw sendErr; // keep original
+        }
+      } else {
+        throw sendErr;
+      }
+    }
 
     res.json({ success: true, message: 'Message sent successfully.' });
   } catch (err) {
     console.error('Contact error:', err);
+    if (err && (err.code === 'ETIMEDOUT' || err.command === 'CONN')) {
+      return res.status(504).json({
+        success: false,
+        error: 'Email service timeout connecting to SMTP server. Try again or switch to an email API provider (SendGrid/Mailgun/Resend).'
+      });
+    }
     res.status(500).json({ success: false, error: 'Internal server error. Please try again later.' });
+  }
+});
+
+// Transport verification endpoint (diagnostics) - DO NOT expose publicly in production without protection
+app.get('/api/contact/verify', async (req, res) => {
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const smtpPort = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 587;
+  const start = Date.now();
+  try {
+    if (!(smtpHost && smtpUser && smtpPass)) {
+      return res.status(400).json({ success: false, error: 'Missing SMTP env vars.' });
+    }
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: { user: smtpUser, pass: smtpPass },
+      connectionTimeout: 15_000,
+      socketTimeout: 15_000,
+      greetingTimeout: 10_000
+    });
+    await transporter.verify();
+    res.json({ success: true, elapsedMs: Date.now() - start, portTried: smtpPort });
+  } catch (err) {
+    console.error('Verify error:', err);
+    res.status(500).json({ success: false, error: err.message, code: err.code, elapsedMs: Date.now() - start });
   }
 });
 
